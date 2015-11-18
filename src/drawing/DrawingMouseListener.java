@@ -12,7 +12,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 
 	Drawing drawing;
 	Shape currentShape = null;
-	ArrayList<Shape> shapeList = new ArrayList<Shape>();
+
 	int nbshape = 0;
 	public DrawingMouseListener(Drawing d){
 		drawing = d;
@@ -26,8 +26,9 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 			currentShape.setOrigin(e.getPoint());
 			drawing.repaint();
 		}
-		if(shapeList.size() != 0){
-			for(Shape s: shapeList){
+		if(drawing.shapeSelect.size() != 0){
+			for(Shape s: drawing.shapeSelect){
+				//Point  p = new Point (s.origin.x  + e.getX(), s.origin.y + e.getY());
 				//s.origin.x = s.origin.x + e.getX();
 				//s.origin.y = s.origin.y + e.getPoint().x;
 				
@@ -55,8 +56,8 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == 1) {
 			currentShape = null;
-			if (shapeList.size() != 0) {
-				shapeList.clear();
+			if (drawing.shapeSelect.size() != 0) {
+				drawing.shapeSelect.clear();
 				nbshape = 0;
 				drawing.updateNbSelect(Integer.toString(0));
 				//drawing.updateStatus("Objects unselected");
@@ -74,7 +75,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 		if (e.getButton() == 3){
 			for(Shape s : drawing){
 				if(s.isOn(e.getPoint())){
-					shapeList.add(s);
+					drawing.shapeSelect.add(s);
 					nbshape ++;
 					drawing.updateNbSelect(Integer.toString(nbshape));
 					//drawing.updateStatus("Selected objects : " + shapeList.size());

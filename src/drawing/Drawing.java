@@ -1,6 +1,7 @@
 package drawing;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.*;
 /**
@@ -9,9 +10,10 @@ import java.util.*;
 public class Drawing extends JPanel implements Iterable<Shape> {
 
 	private static final long serialVersionUID = 1L;
-	
+	ArrayList<Shape> shapeSelect = new ArrayList<Shape>();
 	ArrayList<Shape> shapes;
 	Observer obs;
+	
 	public Drawing(Observer o){
 		super();
 		shapes = new ArrayList<Shape>();
@@ -52,8 +54,30 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 		obs.updateText(Integer.toString(shapes.size()));
 		this.repaint();
 	}
+	/**
+	 * 
+	 * @param nb
+	 */
 	public void updateNbSelect(String nb){
 		obs.updateSelectText(nb);
 	}
-	
+	/**
+	 * duplique les formes
+	 */
+	public void duplicate(){
+		for( Shape s : shapeSelect){
+			Point p = new Point(s.origin.x, s.origin.y+100);
+			if(s instanceof Rectangle){
+				
+				Rectangle r = new Rectangle(p, ((Rectangle) s).width, ((Rectangle) s).height, ((Rectangle) s).color);
+				shapes.add(r);
+				
+			}
+			else if (s instanceof Circle){
+				Circle c = new Circle(p, ((Circle) s).getRadius(),((Circle) s).getColor());
+				shapes.add(c);
+			}
+			this.repaint();
+		}
+	}
 }

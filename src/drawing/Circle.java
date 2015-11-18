@@ -27,7 +27,11 @@ public class Circle extends Shape{
 	private double distanceToCenter(Point p){
 		return this.origin.distance(p);
 	}
-	
-
+	public double getRadius(){
+		return radius;
+	}
+	public Color getColor(){
+		return color;
+	}
 
 }

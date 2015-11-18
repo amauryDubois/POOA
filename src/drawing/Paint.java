@@ -20,6 +20,7 @@ public class Paint {
 	private JButton clearButton;
 	private JButton circleButton;
 	private JButton rectangleButton;
+	private JButton duplicate;
 	
 	private JPanel buttonPanel;
 	private JPanel statusPanel;
@@ -49,6 +50,7 @@ public class Paint {
 		clearButton = new JButton("Clear");
 		circleButton = new JButton("Circle");
 		rectangleButton = new JButton("Rectangle");
+		duplicate = new JButton("Dupliquer");
 		info = new JLabel("nombre de formes :");
 		text = new JLabel("0");
 		infoShape = new JLabel("Select"); 
@@ -67,6 +69,7 @@ public class Paint {
 		buttonPanel.add(clearButton);
 		buttonPanel.add(circleButton);
 		buttonPanel.add(rectangleButton);
+		buttonPanel.add(duplicate);
 		
 		bottomPanel.add(buttonPanel, BorderLayout.NORTH);
 		bottomPanel.add(statusPanel, BorderLayout.SOUTH);	
@@ -78,7 +81,7 @@ public class Paint {
 		clearButton.addActionListener(new ClearButtonListener(drawing));
 		circleButton.addActionListener(new CircleButtonListener(drawing));
 		rectangleButton.addActionListener(new RectangleButtonListener(drawing));
-		
+		duplicate.addActionListener(new DuplicateButtonListener(drawing));
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing);
 		drawing.addMouseListener(l);
