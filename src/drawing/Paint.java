@@ -30,7 +30,8 @@ public class Paint {
 	
 	private JLabel info;
 	private JLabel text;
-	
+	private JLabel infoShape;
+	private JLabel nbShape;
 	private Observer obs;
 	
 	public void run(){
@@ -50,14 +51,17 @@ public class Paint {
 		rectangleButton = new JButton("Rectangle");
 		info = new JLabel("nombre de formes :");
 		text = new JLabel("0");
-		
+		infoShape = new JLabel("Select"); 
+		nbShape = new JLabel("0");
 		status = new JLabel("Status Bar");
 		status.setFont(new Font("Sans Serif", Font.ITALIC, 12));
 		statusPanel = new JPanel();
 		statusPanel.setBorder(new EtchedBorder (EtchedBorder.LOWERED));
 		statusPanel.add(status);
 		statusPanel.add(info);	
-		statusPanel.add(text);		
+		statusPanel.add(text);
+		statusPanel.add(infoShape);	
+		statusPanel.add(nbShape);	
 		
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
@@ -85,6 +89,9 @@ public class Paint {
 		frame.setVisible(true);
 		
 		
+	}
+	public void setTextSelect (String nb){
+		nbShape.setText(nb);
 	}
 	
 	public void setText(String nb){

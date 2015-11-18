@@ -52,6 +52,8 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 		obs.updateText(Integer.toString(shapes.size()));
 		this.repaint();
 	}
-	
+	public void updateNbSelect(String nb){
+		obs.updateSelectText(nb);
+	}
 	
 }

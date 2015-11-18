@@ -11,4 +11,9 @@ public class Observer {
 	public void updateText(String nb){
 		paint.setText(nb);
 	}
+	
+	public void updateSelectText(String nb){
+		paint.setTextSelect(nb);
+	}
 }
+

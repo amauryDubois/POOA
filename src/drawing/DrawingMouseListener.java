@@ -13,7 +13,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	Drawing drawing;
 	Shape currentShape = null;
 	ArrayList<Shape> shapeList = new ArrayList<Shape>();
-	
+	int nbshape = 0;
 	public DrawingMouseListener(Drawing d){
 		drawing = d;
 	}
@@ -57,6 +57,8 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 			currentShape = null;
 			if (shapeList.size() != 0) {
 				shapeList.clear();
+				nbshape = 0;
+				drawing.updateNbSelect(Integer.toString(0));
 				//drawing.updateStatus("Objects unselected");
 			}
 		}
@@ -73,7 +75,8 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 			for(Shape s : drawing){
 				if(s.isOn(e.getPoint())){
 					shapeList.add(s);
-					
+					nbshape ++;
+					drawing.updateNbSelect(Integer.toString(nbshape));
 					//drawing.updateStatus("Selected objects : " + shapeList.size());
 				}
 			}
