@@ -73,6 +73,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 			for(Shape s : drawing){
 				if(s.isOn(e.getPoint())){
 					shapeList.add(s);
+					
 					//drawing.updateStatus("Selected objects : " + shapeList.size());
 				}
 			}
