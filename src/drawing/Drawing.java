@@ -80,4 +80,16 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 			this.repaint();
 		}
 	}
+	/**
+	 * si la forme est présente
+	 */
+	public boolean IsOn(Shape s){
+		for(Shape shape : shapeSelect){
+			if (shape.equals(s)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

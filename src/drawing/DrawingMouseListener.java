@@ -1,5 +1,6 @@
 package drawing;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,7 +13,9 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 
 	Drawing drawing;
 	Shape currentShape = null;
-
+	Point last = new Point();
+	int xOrigin= 0;
+	int yOrigin= 0;
 	int nbshape = 0;
 	public DrawingMouseListener(Drawing d){
 		drawing = d;
@@ -22,20 +25,30 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	 * Bouge la forme s�lectionn�e (si une forme est s�lectionn�e)
 	 */
 	public void mouseDragged(MouseEvent e) {
-		if(currentShape != null){
+		int dx = (e.getPoint().x-xOrigin);
+		int dy = (e.getPoint().y-yOrigin);
+		if(currentShape != null && drawing.shapeSelect.size() == 0){
 			currentShape.setOrigin(e.getPoint());
 			drawing.repaint();
 		}
 		if(drawing.shapeSelect.size() != 0){
+
 			for(Shape s: drawing.shapeSelect){
-				//Point  p = new Point (s.origin.x  + e.getX(), s.origin.y + e.getY());
+				//Point  curent = new Point ( e.getX(), e.getY());
+				
+				System.out.println(dx+" "+dy);
 				//s.origin.x = s.origin.x + e.getX();
 				//s.origin.y = s.origin.y + e.getPoint().x;
+				Point pos = new Point(  dx+ s.origin.x, dy+s.origin.y );
+				s.setOrigin(pos);
 				
-				s.setOrigin(e.getPoint());
 				drawing.repaint();
 			}
+			
 		}
+		last = e.getPoint();
+		xOrigin = e.getX();
+		yOrigin = e.getY();
 	}
 	
 	/**
@@ -45,6 +58,9 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 		for(Shape s : drawing){
 			if(s.isOn(e.getPoint())){
 				currentShape = s;
+				last = e.getPoint();
+				xOrigin = e.getX();
+				yOrigin = e.getY();
 				break;
 			}
 		}
@@ -60,6 +76,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 				drawing.shapeSelect.clear();
 				nbshape = 0;
 				drawing.updateNbSelect(Integer.toString(0));
+				last = null;
 				//drawing.updateStatus("Objects unselected");
 			}
 		}
@@ -75,9 +92,12 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 		if (e.getButton() == 3){
 			for(Shape s : drawing){
 				if(s.isOn(e.getPoint())){
-					drawing.shapeSelect.add(s);
-					nbshape ++;
-					drawing.updateNbSelect(Integer.toString(nbshape));
+					if(!drawing.IsOn(s)){
+						drawing.shapeSelect.add(s);
+						nbshape ++;
+						drawing.updateNbSelect(Integer.toString(nbshape));
+							
+					}
 					//drawing.updateStatus("Selected objects : " + shapeList.size());
 				}
 			}
